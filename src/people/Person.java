@@ -9,6 +9,7 @@ public class Person {
 	private int calsPlant;
 	private int daysDeficient;
 	private int deficientStreak;
+	private boolean inParty;
 	
 	/** The maximum weight a person can carry */
 	public static final int MAX_WEIGHT = 30;
@@ -27,6 +28,7 @@ public class Person {
 		setCalsPlant(0);
 		this.daysDeficient = 0;
 		this.deficientStreak = 0;
+		this.setInParty(false);
 	}
 
 	/**
@@ -84,5 +86,19 @@ public class Person {
 	 */
 	public void resetDefecientStreak() {
 		this.deficientStreak = 0;
+	}
+
+	/**
+	 * @return True if person is in a party
+	 */
+	public boolean isInParty() {
+		return inParty;
+	}
+
+	/**
+	 * @param inParty - Sets if person is in a party
+	 */
+	public void setInParty(boolean inParty) {
+		this.inParty = inParty;
 	}
 }

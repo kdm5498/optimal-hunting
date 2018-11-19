@@ -60,6 +60,7 @@ public class Party {
 	 * @param newMember - Person to add
 	 */
 	public void addMember(Person newMember) {
+		newMember.setInParty(true);
 		this.getMembers().add(newMember);
 	}
 	
@@ -68,6 +69,14 @@ public class Party {
 	 * @param toRemove - Person to remove
 	 */
 	public void removeMember(Person toRemove) {
+		toRemove.setInParty(false);
 		this.getMembers().remove(toRemove);
+	}
+	
+	/**
+	 * @return The size of this party
+	 */
+	public int size() {
+		return this.getMembers().size();
 	}
 }
