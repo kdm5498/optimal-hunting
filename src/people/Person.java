@@ -37,7 +37,7 @@ public class Person {
 	}
 
 	/**
-	 * @param The number of calories from meat this person has now eaten today
+	 * @param calsMeat - The number of calories from meat this person has now eaten today
 	 */
 	public void setCalsMeat(int calsMeat) {
 		this.calsMeat = calsMeat;
@@ -51,7 +51,7 @@ public class Person {
 	}
 
 	/**
-	 * @param The number of calories from plants this person has now eaten today
+	 * @param calsPlant - The number of calories from plants this person has now eaten today
 	 */
 	public void setCalsPlant(int calsPlant) {
 		this.calsPlant = calsPlant;
