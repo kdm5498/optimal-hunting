@@ -1,4 +1,4 @@
-package genetics;
+package neural;
 
 import java.util.List;
 
@@ -13,6 +13,12 @@ public class Net {
 		this.setId(id);
 		this.setInputLayer(inputLayer);
 		this.setHiddenLayers(hiddenLayers);
+		this.setOutputLayer(outputLayer);
+	}
+	
+	public Net(String id, Layer inputLayer, Layer outputLayer) {
+		this.setId(id);
+		this.setInputLayer(inputLayer);
 		this.setOutputLayer(outputLayer);
 	}
 
@@ -70,5 +76,9 @@ public class Net {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public double getOutput() {
+		return outputLayer.getNeurons().get(0).calculateOutput();
 	}
 }

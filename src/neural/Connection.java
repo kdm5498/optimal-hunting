@@ -1,4 +1,4 @@
-package genetics;
+package neural;
 
 public class Connection {
 	protected Neuron fromNeuron;

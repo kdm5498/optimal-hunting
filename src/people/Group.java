@@ -10,6 +10,8 @@ import java.util.List;
 public class Group {
 	private List<Party> parties;
 	private List<Person> members;
+	private double excessMeat;
+	private double excessPlants;
 	
 	/**
 	 * Initializes a new group with default values
@@ -98,5 +100,85 @@ public class Group {
 		
 		// Add the allocated party to the list of parties
 		this.getParties().add(newParty);
+	}
+	
+	public void feedGroup() throws StarvationException {
+		double totalCalsMeat = 0.0;
+		double totalCalsPlants = 0.0;
+		
+		for(Party party: this.parties) {
+			if(party.isHunting()) {
+				totalCalsMeat += party.getCurrentCals();
+			} else {
+				totalCalsPlants += party.getCurrentCals();
+			}
+		}
+		
+		// New resources
+		double shareMeat = totalCalsMeat / this.members.size();
+		double sharePlants = totalCalsPlants / this.members.size();
+		
+		// Take surplus from stores as needed, or add surplus to stores
+		if(shareMeat < Person.CALS_NEEDED_MEAT) {
+			double difference = Person.CALS_NEEDED_MEAT - shareMeat;
+			double neededSurplus = difference * this.members.size();
+			if(neededSurplus < this.excessMeat) {
+				shareMeat = Person.CALS_NEEDED_MEAT;
+				this.excessMeat -= neededSurplus;
+			} else {
+				double availableSurplus = this.excessMeat / this.members.size();
+				shareMeat += availableSurplus;
+				this.excessMeat = 0;
+			}
+		} else {
+			this.excessMeat += (shareMeat - Person.CALS_NEEDED_MEAT) * members.size();
+		}
+		if(sharePlants < Person.CALS_NEEDED_PLANT) {
+			double difference = Person.CALS_NEEDED_PLANT - sharePlants;
+			double neededSurplus = difference * this.members.size();
+			if(neededSurplus < this.excessPlants) {
+				sharePlants = Person.CALS_NEEDED_PLANT;
+				this.excessPlants -= neededSurplus;
+			} else {
+				double availableSurplus = this.excessPlants / this.members.size();
+				sharePlants += availableSurplus;
+				this.excessPlants = 0;
+			}
+		} else {
+			this.excessPlants += (sharePlants - Person.CALS_NEEDED_PLANT) * members.size();
+		}
+		
+		// Feed each person their share
+		for(Person member: this.members) {
+			member.feed(shareMeat, sharePlants);
+		}
+	}
+
+	/**
+	 * @return the excessMeat
+	 */
+	public double getExcessMeat() {
+		return excessMeat;
+	}
+
+	/**
+	 * @param excessMeat the excessMeat to set
+	 */
+	public void setExcessMeat(double excessMeat) {
+		this.excessMeat = excessMeat;
+	}
+
+	/**
+	 * @return the excessPlants
+	 */
+	public double getExcessPlants() {
+		return excessPlants;
+	}
+
+	/**
+	 * @param excessPlants the excessPlants to set
+	 */
+	public void setExcessPlants(double excessPlants) {
+		this.excessPlants = excessPlants;
 	}
 }

@@ -5,8 +5,6 @@ package people;
  * @author Kyle McVay
  */
 public class Person {
-	private int calsMeat;
-	private int calsPlant;
 	private int daysDeficient;
 	private int deficientStreak;
 	private boolean inParty;
@@ -24,39 +22,9 @@ public class Person {
 	 * Initializes a new Person with default values
 	 */
 	public Person() {
-		setCalsMeat(0);
-		setCalsPlant(0);
 		this.daysDeficient = 0;
 		this.deficientStreak = 0;
 		this.setInParty(false);
-	}
-
-	/**
-	 * @return Number of calories from meat this person has eaten today
-	 */
-	public int getCalsMeat() {
-		return calsMeat;
-	}
-
-	/**
-	 * @param calsMeat - The number of calories from meat this person has now eaten today
-	 */
-	public void setCalsMeat(int calsMeat) {
-		this.calsMeat = calsMeat;
-	}
-
-	/**
-	 * @return Number of calories from plants this person has eaten today
-	 */
-	public int getCalsPlant() {
-		return calsPlant;
-	}
-
-	/**
-	 * @param calsPlant - The number of calories from plants this person has now eaten today
-	 */
-	public void setCalsPlant(int calsPlant) {
-		this.calsPlant = calsPlant;
 	}
 
 	/**
@@ -75,10 +43,14 @@ public class Person {
 	
 	/**
 	 * Indicates that this person did not meet their calorie requirements from meat for a day
+	 * @throws StarvationException 
 	 */
-	public void defficientDay() {
+	public void defficientDay() throws StarvationException {
 		this.daysDeficient++;
 		this.deficientStreak++;
+		if(this.deficientStreak >= 20) {
+			throw new StarvationException("This person has starved");
+		}
 	}
 	
 	/**
@@ -100,5 +72,17 @@ public class Person {
 	 */
 	public void setInParty(boolean inParty) {
 		this.inParty = inParty;
+	}
+	
+	public void feed(double calsMeat, double calsPlants) throws StarvationException {
+		if(calsMeat < CALS_NEEDED_MEAT || calsPlants < CALS_NEEDED_PLANT) {
+			defficientDay();
+		} else {
+			resetDefecientStreak();
+		}
+	}
+	
+	public double getCarryWeight() {
+		return MAX_WEIGHT * (1 - this.deficientStreak * .05);
 	}
 }

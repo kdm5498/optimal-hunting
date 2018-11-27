@@ -10,6 +10,8 @@ public class Resource {
 	private int gatherTime;
 	private int processTime;
 	private int encounterRate;
+	private double weight;
+	private String name;
 	
 	/**
 	 * Initializes a new resource with the given values
@@ -20,12 +22,14 @@ public class Resource {
 	 * @param processTime - Time it takes to process this resource
 	 * @param encounterRate - Number of minutes it takes on average to find this resource.
 	 */
-	public Resource(int calories, boolean animal, int gatherTime, int processTime, int encounterRate) {
+	public Resource(int calories, boolean animal, int gatherTime, int processTime, int encounterRate, int weight, String name) {
 		this.calories = calories;
 		this.animal = animal;
 		this.gatherTime = gatherTime;
 		this.processTime = processTime;
 		this.encounterRate = encounterRate;
+		this.weight = weight;
+		this.name = name;
 	}
 
 	/**
@@ -61,5 +65,33 @@ public class Resource {
 	 */
 	public int getEncounterRate() {
 		return encounterRate;
+	}
+
+	/**
+	 * @return the weight
+	 */
+	public double getWeight() {
+		return weight;
+	}
+
+	/**
+	 * @param weight the weight to set
+	 */
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 }

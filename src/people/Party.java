@@ -1,7 +1,11 @@
 package people;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import resource.Resource;
 
 /**
  * This class represents a hunting or gathering party. A party is made up of a number of People, and events occur on a per party basis.
@@ -10,6 +14,10 @@ import java.util.List;
 public class Party {
 	private List<Person> members;
 	private boolean hunting;
+	private boolean active;
+	private boolean isGathering;
+	private int gatherTimeRemaining;
+	private Map<Resource, Double> obtained;
 	
 	/**
 	 * Initializes a new party with an empty list of members
@@ -25,6 +33,10 @@ public class Party {
 	public Party(boolean hunting, List<Person> members) {
 		this.setHunting(hunting);
 		this.setMembers(members);
+		this.setActive(true);
+		this.setGathering(false);
+		this.setGatherTimeRemaining(0);
+		this.setObtained(new HashMap<Resource, Double>());
 	}
 
 	/**
@@ -78,5 +90,128 @@ public class Party {
 	 */
 	public int size() {
 		return this.getMembers().size();
+	}
+
+	/**
+	 * @return the active
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @return the isGathering
+	 */
+	public boolean isGathering() {
+		return isGathering;
+	}
+
+	/**
+	 * @param isGathering the isGathering to set
+	 */
+	public void setGathering(boolean isGathering) {
+		this.isGathering = isGathering;
+	}
+
+	/**
+	 * @return the gatherTimeRemaining
+	 */
+	public int getGatherTimeRemaining() {
+		return gatherTimeRemaining;
+	}
+
+	/**
+	 * @param gatherTimeRemaining the gatherTimeRemaining to set
+	 */
+	public void setGatherTimeRemaining(int gatherTimeRemaining) {
+		this.gatherTimeRemaining = gatherTimeRemaining;
+	}
+
+	/**
+	 * @return the currentWeight
+	 */
+	public double getCurrentWeight() {
+		double currentWeight = 0.0;
+		
+		for(Double weight: this.obtained.values()) {
+			currentWeight += weight.doubleValue();
+		}
+		
+		return currentWeight;
+	}
+	
+	public double getMaxWeight() {
+		double maxWeight = 0.0;
+		for(Person person: this.members) {
+			maxWeight += person.getCarryWeight();
+		}
+		return maxWeight;
+	}
+
+	/**
+	 * @return the currentCals
+	 */
+	public double getCurrentCals() {
+		double currentCals = 0.0;
+		
+		for(Resource resource: this.obtained.keySet()) {
+			currentCals += this.obtained.get(resource) * (resource.getCalories() / resource.getWeight());
+		}
+		
+		return currentCals;
+	}
+
+	/**
+	 * @return the obtained
+	 */
+	public Map<Resource, Double> getObtained() {
+		return this.obtained;
+	}
+
+	/**
+	 * @param obtained the obtained to set
+	 */
+	public void setObtained(Map<Resource, Double> obtained) {
+		this.obtained = obtained;
+	}
+	
+	private void addResource(Resource resource, double amount) {
+		this.obtained.put(resource, this.obtained.getOrDefault(resource, 0.0) + amount);
+	}
+	
+	private void removeResource(Resource resource, double amount) {
+		this.obtained.put(resource, this.obtained.getOrDefault(resource, 0.0) - amount);
+		if(this.obtained.get(resource) <= 0.0) {
+			this.obtained.remove(resource);
+		}
+	}
+	
+	public void optimizeResources(Resource toAdd, double amount) {
+		if(this.getCurrentWeight() + amount < this.getMaxWeight()) {
+			addResource(toAdd, amount);
+			return;
+		}
+		
+		Resource lowestValue = toAdd;
+		
+		for(Resource resource: this.obtained.keySet()) {
+			if(resource.getCalories() / resource.getWeight() < lowestValue.getCalories() / lowestValue.getWeight()) {
+				lowestValue = resource;
+			}
+		}
+		
+		if(lowestValue.equals(toAdd)) {
+			addResource(toAdd, this.getMaxWeight() - this.getCurrentWeight());
+		} else {
+			removeResource(lowestValue, this.getCurrentWeight() + amount - this.getMaxWeight());
+			optimizeResources(toAdd, amount);
+		}
 	}
 }

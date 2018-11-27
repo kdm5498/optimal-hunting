@@ -1,4 +1,4 @@
-package genetics;
+package neural;
 
 import java.util.List;
 
