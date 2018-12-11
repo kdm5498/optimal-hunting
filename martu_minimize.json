@@ -1,0 +1,146 @@
+{
+	"numPeople": 40,
+	"partySize": 2,
+	"numParties": 10,
+	"daysToRun": 365,
+	"hoursToRun": 8,
+	"calsBurnedAtRest": 1,
+	"calsBurnedForaging": 5,
+	"meatRatio": 0.5,
+	"maxWeight": 30,
+	"numGenerations": 10000,
+	"numIndividuals": 25,
+	"maximize": false,
+	"resources": [
+		{
+			"name": "Sand Monitor",
+			"animal": true,
+			"calories": 1946,
+			"gatherTime": 22,
+			"processTime": 2,
+			"encounterRate": 155,
+			"weight": 1.01413,
+			"successRate": 0.909
+		},
+		{
+			"name": "Bustard",
+			"animal": true,
+			"calories": 3322,
+			"gatherTime": 17,
+			"processTime": 3,
+			"encounterRate": 118,
+			"weight": 12.10558,
+			"successRate": 0.436
+		},
+		{
+			"name": "Hill Kangaroo",
+			"animal": true,
+			"calories": 4003,
+			"gatherTime": 58,
+			"processTime": 5,
+			"encounterRate": 136,
+			"weight": 48.435559,
+			"successRate": 0.209
+		},
+		{
+			"name": "Perentie",
+			"animal": true,
+			"calories": 2069,
+			"gatherTime": 26,
+			"processTime": 13,
+			"encounterRate": 120,
+			"weight": 5.079451,
+			"successRate": 0.663
+		},
+		{
+			"name": "Cat",
+			"animal": true,
+			"calories": 3883,
+			"gatherTime": 32,
+			"processTime": 13,
+			"encounterRate": 120,
+			"weight": 5.590923,
+			"successRate": 0.96
+		},
+		{
+			"name": "Bush Onion",
+			"animal": false,
+			"calories": 1119,
+			"gatherTime": 24,
+			"processTime": 0,
+			"encounterRate": 118,
+			"weight": 15.63959,
+			"successRate": 1
+		},
+		{
+			"name": "Desert Raisin",
+			"animal": false,
+			"calories": 2372,
+			"gatherTime": 58,
+			"processTime": 0,
+			"encounterRate": 33,
+			"weight": 14.68499,
+			"successRate": 1
+		},
+		{
+			"name": "Cossid Larvae",
+			"animal": true,
+			"calories": 678,
+			"gatherTime": 2,
+			"processTime": 44,
+			"encounterRate": 30,
+			"weight": 0.61068,
+			"successRate": 1
+		},
+		{
+			"name": "Bush Tomato",
+			"animal": false,
+			"calories": 3096,
+			"gatherTime": 37,
+			"processTime": 0,
+			"encounterRate": 13,
+			"weight": 14.21982,
+			"successRate": 1
+		},
+		{
+			"name": "Pencil Yam",
+			"animal": false,
+			"calories": 447,
+			"gatherTime": 58,
+			"processTime": 0,
+			"encounterRate": 20,
+			"weight": 1.01633,
+			"successRate": 1
+		},
+		{
+			"name": "Honey",
+			"animal": false,
+			"calories": 5461,
+			"gatherTime": 6,
+			"processTime": 55,
+			"encounterRate": 60,
+			"weight": 3.950684,
+			"successRate": 0.895
+		},
+		{
+			"name": "Acacia Tree Seeds",
+			"animal": false,
+			"calories": 9351,
+			"gatherTime": 125,
+			"processTime": 480,
+			"encounterRate": 60,
+			"weight": 12.09676,
+			"successRate": 1
+		},
+		{
+			"name": "Grass Seeds",
+			"animal": false,
+			"calories": 2322,
+			"gatherTime": 13,
+			"processTime": 0,
+			"encounterRate": 281,
+			"weight": 5.302117,
+			"successRate": 1
+		}
+	]
+}
