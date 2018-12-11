@@ -19,4 +19,4 @@ This will run against default Martu values.
 
 ## Configuration
 
-View the `martu.json` or `martu_minimize.json` files for formatting of configuration files.
+View the `martu.json` or `martu_minimize.json` files for formatting of configuration files. The default values for loops are pretty high, it may be advisable to lower the number of generations from default.
